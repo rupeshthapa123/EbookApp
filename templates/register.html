@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{% static 'style/styles.css' %}" />
+</head>
+<body>
+    <form class="signup-form" action="register" method="POST">
+        {% csrf_token %}
+        <!-- form header -->
+        <div class="form-header">
+          <h1>Create Account</h1>
+        </div>
+  
+        <!-- form body -->
+        <div class="form-body">
+  
+          <!-- Firstname and Lastname -->
+          <div class="horizontal-group">
+            <div class="form-group left">
+              <label for="firstname" class="label-title">First name *</label>
+              <input type="text" name="first_name" class="form-input" placeholder="enter your first name" required="required" />
+            </div>
+            <div class="form-group right">
+              <label for="lastname" class="label-title">Last name</label>
+              <input type="text" name="last_name" class="form-input" placeholder="enter your last name" />
+            </div>
+          </div>
+  
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email" class="label-title">Email*</label>
+            <input type="email" name="email" class="form-input" placeholder="enter your email" required="required">
+          </div>
+
+          <div class="form-group">
+            <label for="username" class="label-title">Username*</label>
+            <input type="text" name="username" class="form-input" placeholder="enter your username" required="required">
+          </div>
+          <!-- Passwrod and confirm password -->
+          <div class="horizontal-group">
+            <div class="form-group left">
+              <label for="password" class="label-title">Password *</label>
+              <input type="password" name="password" class="form-input" placeholder="enter your password" required="required">
+            </div>
+            <div class="form-group right">
+              <label for="confirm-password" class="label-title">Confirm Password *</label>
+              <input type="password" class="form-input" name="confirm-password" placeholder="enter your password again" required="required">
+            </div>
+          </div>
+  
+        <!-- form-footer -->
+        <div class="form-footer">
+          <span>* required</span>
+          <a href="login" class="btn">Login</a>
+          <button type="submit" class="btn">Create</button>
+        </div>
+  
+      </form>
+      <div>
+          {% for message in messages %}
+          <h3> {{message}} </h3>
+          {% endfor %}
+      </div>
+</body>
+</html>
