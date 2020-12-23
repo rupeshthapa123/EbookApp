@@ -20,12 +20,12 @@ def home(request):
     image_data = open(settings.MEDIA_ROOT, “name.pdf”, “rb”).read()
     return HttpResponse(image_data, mimetype=”application/pdf”)
 """
-"""
+
 def pdf_view(request):
     books = Book()
     file_path = os.path.join(settings.MEDIA_ROOT, "documents/" + books.book_file + ".pdf")
     return render(request, 'books.html', {'file_path': file_path})
-"""
+
 """
 def download(request,path):
 	file_path=os.path.join(settings.MEDIA_ROOT,path)

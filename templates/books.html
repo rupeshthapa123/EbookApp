@@ -73,6 +73,9 @@
 
 							<!-- Section -->
 								<section>
+
+
+
 									<header class="major">
 										<h2>Books</h2>
 									</header>
@@ -85,12 +88,11 @@
 											<h3>Published Date: {{books.pub_date}}</h3>
 											<p>{{books.description}}</p>
 											<ul class="actions">
-												<li><a href="window.open('{{books.book_file}}')" class="button">More</a></li>
+										    <li><a href onClick="openTab(this)" name="media/{{books.book_file}}" class="button">More</a></li>
 											</ul>
 										</article>
                                         {% endfor %}
-									
-									</div>
+									</div>   
 								</section>
 
 						</div>
@@ -194,5 +196,13 @@
 			<script src="{% static 'assets/js/breakpoints.min.js'%}"></script>
 			<script src="{% static 'assets/js/util.js'%}"></script>
 			<script src="{% static 'assets/js/main.js'%}"></script>
+
+			<script type="text/javascript">
+				function openTab(th)
+				{
+					window.open(th.name,'_blank');
+				}
+	
+			</script>
 	</body>
 </html>
