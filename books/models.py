@@ -11,4 +11,21 @@ class Book(models.Model):
     categories =  models.CharField(max_length=100)
     cover_image = models.ImageField(upload_to='images')
     book_file = models.FileField(upload_to='documents/')
+
+    def __str__(self):
+        return self.title
+
+class Comment(models.Model):
+    book = models.ForeignKey(Book,on_delete=models.CASCADE,related_name='comments')
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return 'Comment {} by {}'.format(self.body, self.name)
+
+    class Meta:
+        ordering = ['created_on']
     

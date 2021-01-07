@@ -3,16 +3,9 @@ from . import views
 from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
-import django
-
+from .views import bookdetails
 
 urlpatterns = [
     path('', views.book, name='book'),
-    path('books', views.bookdetails, name='bookdetails'),
+    path('books/<int:book_id>/',bookdetails,name='bookdetails'),
 ]
-
-"""
-urlpatterns = [
-    url('media/', django.views.static.serve,
-             {'document_root': settings.MEDIA_ROOT}),
-]"""
