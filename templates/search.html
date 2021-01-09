@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+    <header class="major">
+        <h2>Books</h2>
+    </header>   
+        {% if books|length < 1 %}
+        <p>Book Not found</p>
+        <p> Your search: {{query}} did not match any in database</p>
+        <ul><li>Try different Keywords</li></ul>
+        {% endif %}
+   
+    <div class="posts">
+        {% for books in books %}
+        <article>
+            <a href="#" class="img-thumbnail"><img src="{{books.cover_image.url}}" alt="" /></a>
+            <h3>{{books.title}}</h3>
+            <ul class="actions">
+                <li><a href="/books/{{books.id}}" class="button">More</a></li>
+            </ul>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

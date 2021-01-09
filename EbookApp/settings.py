@@ -26,11 +26,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+#STAR_RATING_RATING_MODEL = 'myapp.MyRating'
 # Application definition
 
 INSTALLED_APPS = [
     'books.apps.BooksConfig',
+    'django.contrib.postgres',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

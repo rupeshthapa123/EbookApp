@@ -10,6 +10,5 @@ class EditProfileForm(UserChangeForm):
             'first_name',
             'last_name',
             'username',
-            'password',
             'email'
         }

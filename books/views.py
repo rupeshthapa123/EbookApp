@@ -4,7 +4,8 @@ from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse, HttpResponseNotFound
 from pathlib import os
 from django.conf import settings
-from .forms import CommentForm
+from .forms import CommentForm, FavouriteForm
+from django.contrib import auth
 
 # Create your views here.
 def book(request):
@@ -33,26 +34,33 @@ def bookdetails(request, book_id):
                                            'new_comment': new_comment,
                                            'comment_form': comment_form})
 
+def addfavourite(request, book_id):
+    user =auth.get_user(request)
+    bookdetail = get_object_or_404(Book, pk=book_id)
+    new_favourite = None
+    if request.method == 'POST':
+        favourite_form = FavouriteForm(request.POST)
+        if favourite_form.is_valid():
+            new_favourite = favourite_form.save(commit=False)
+            new_favourite.user = user
+            new_favourite.book = bookdetail
+            # Save the comment to the database
+            new_favourite.save()
+    else:
+        favourite_form = FavouriteForm() 
+    return render(request, 'books.html', {'user':user, 'bookdetail':bookdetail, 'new_favourite':new_favourite, 'favourite_form':favourite_form})
 
-"""
-def home(request):
-    books = Book()
-    name = books.book_file
-    image_data = open(settings.MEDIA_ROOT, “name.pdf”, “rb”).read()
-    return HttpResponse(image_data, mimetype=”application/pdf”)
-"""
-"""
-def pdf_view(request):
-    books = Book()
-    file_path = os.path.join(settings.MEDIA_ROOT, "documents/" + books.book_file + ".pdf")
-    return render(request, 'books.html', {'file_path': file_path})
-"""
-"""
-def download(request,path):
-	file_path=os.path.join(settings.MEDIA_ROOT,path)
-	if os.path.exists(file_path):
-		with open(file_path,'rb')as fh:
-			response=HttpResponse(fh.read(),content_type="application/adminupload")
-			response['Content-Disposition']='inline;filename='+os.path.basename(file_path)
-			return response
-	raise Http404	"""	
+def search(request):
+    query = request.GET['query']
+    if len(query)>78:
+        books=Book.objects.none()
+    else:
+        bookstitle = Book.objects.filter(title__icontains=query)
+        booksauthor = Book.objects.filter(author__icontains=query)
+        bookscategories = Book.objects.filter(categories__icontains=query)
+        books = bookstitle.union(booksauthor).union(bookscategories)
+    
+    if books.count()==0:
+        message.error(request,"No search result found")
+    params = {'books': books, 'query': query}
+    return render(request, 'search.html', params)

@@ -1,13 +1,21 @@
-
+{% extends 'form_base.html' %}
+{% block content %}
 {% block head %}
 <title>Profile</title>
-{% endblock %}
 
-<div class="container">
-    <form method="post">
+{% endblock %}
+    <form class="update-form"  method="post">
+    <!-- form body -->
+    <div class="form-body">
+  
+        <!-- Username and Password -->
+        <div class="horizontal-group">
+          <div class="form-group left">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Submit</button>
+        <button type="submit">Update</button>
+        </div>
+      </div>
+    </div>
     </form>
-    <br>
-</div>
+{% endblock %}

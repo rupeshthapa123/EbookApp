@@ -1,14 +1,15 @@
-
+{% extends 'form_base.html' %}
+{% block content %}
 {% block head %}
 <title>Profile</title>
 {% endblock %}
 
-<div class="container">
+<div class="form-body" >
     <h1>Profile</h1>
     <p>Username: {{ user }}</p>
     <p>First name: {{ user.first_name }}</p>
     <p>Last name: {{ user.last_name }}</p>
-    <p>Email: {{ user.email }}</p>
+    <p>Email: {{ user.email }}</p>  
 </div>
-
+{% endblock %}
 

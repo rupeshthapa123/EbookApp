@@ -31,21 +31,17 @@
           </div>
           
         <!-- form-footer -->
-   
-          
-        
-
         <div class="form-footer">
             <span>* required</span>
             <a href="register" class="btn">Register</a>
             <button type="submit" class="btn">Login</button>
-          </div>
-    
-        </form>
-        <div>
-            {% for message in messages %}
-            <h3> {{message}} </h3>
-            {% endfor %}
         </div>
+    
+      </form>
+      <div>
+        {% for message in messages %}
+          <h3> {{message}} </h3>
+        {% endfor %}
+      </div>
 </body>
 </html>
