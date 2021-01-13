@@ -28,6 +28,7 @@ ALLOWED_HOSTS = []
 
 #STAR_RATING_RATING_MODEL = 'myapp.MyRating'
 # Application definition
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 INSTALLED_APPS = [
     'books.apps.BooksConfig',
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +132,9 @@ STATIC_ROOT=  os.path.join(BASE_DIR,'assets')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com' #Localhost
+EMAIL_PORT = 587 #1825
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "rupesh.thapa2050@gmail.com"
+EMAIL_HOST_PASSWORD = "jpyecjyvvugwpggy"

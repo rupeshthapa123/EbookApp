@@ -17,7 +17,7 @@
   
         <!-- form body -->
         <div class="form-body">
-  
+          {% csrf_token %}
           <!-- Firstname and Lastname -->
           <div class="horizontal-group">
             <div class="form-group left">
@@ -35,7 +35,7 @@
             <label for="email" class="label-title">Email*</label>
             <input type="email" name="email" class="form-input" placeholder="enter your email" required="required">
           </div>
-
+          {% csrf_token %}
           <div class="form-group">
             <label for="username" class="label-title">Username*</label>
             <input type="text" name="username" class="form-input" placeholder="enter your username" required="required">

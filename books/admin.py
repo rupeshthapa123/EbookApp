@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Book, Comment, Library
+from .models import Book, Comment
 # Register your models here.
 admin.site.register(Book)
-admin.site.register(Library)
+
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('name', 'body', 'book', 'rating', 'created_on', 'active')

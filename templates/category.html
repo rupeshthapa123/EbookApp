@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% static 'images' as BaseUrl %}
+{% block content %}
+<section>
+	<div class="posts">
+        {% for books in catbooks %}
+		<article>
+            <a href="#" class="img-thumbnail"><img src="{{books.cover_image.url}}" alt="" /></a>
+            <h3>{{books.title}}</h3>
+            <h3>{{books.categories}}</h3>
+			<ul class="actions">
+				<li><a href="/books/{{books.id}}" class="button">More</a></li>
+			</ul>
+        </article>
+        {% endfor %}
+        {% for books in classbooks %}
+        <article>
+            <a href="#" class="img-thumbnail"><img src="{{books.cover_image.url}}" alt="" /></a>
+            <h3>{{books.title}}</h3>
+            <h3>{{books.categories}}</h3>
+			<ul class="actions">
+				<li><a href="/books/{{books.id}}" class="button">More</a></li>
+			</ul>
+        </article>
+        {% endfor %}
+        {% for books in edubooks %}
+        <article>
+            <a href="#" class="img-thumbnail"><img src="{{books.cover_image.url}}" alt="" /></a>
+            <h3>{{books.title}}</h3>
+            <h3>{{books.categories}}</h3>
+			<ul class="actions">
+				<li><a href="/books/{{books.id}}" class="button">More</a></li>
+			</ul>
+        </article>
+        {% endfor %}
+        {% for books in books %}
+        <article>
+            <a href="#" class="img-thumbnail"><img src="{{books.cover_image.url}}" alt="" /></a>
+            <h3>{{books.title}}</h3>
+            <h3>{{books.categories}}</h3>
+			<ul class="actions">
+				<li><a href="/books/{{books.id}}" class="button">More</a></li>
+			</ul>
+        </article>
+		{% endfor %}
+	</div>
+</section>
+{% endblock %}

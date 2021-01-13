@@ -4,7 +4,6 @@
 	<header class="major">
 		<h2>Books</h2>
 	</header>
-
 	<div class="posts">
 		<article>
 			<img src="{{bookdetail.cover_image.url}}" alt="" />
@@ -12,49 +11,59 @@
 		<article>
 			<h3 class="card-text">Title: {{bookdetail.title}}</h3>
 			<h3 class="card-text">Author: {{bookdetail.author}}</h3>
+			<h3 class="card-text">Genre: {{bookdetail.categories}}</h3>
 			<h3 class="card-text">Published Date: {{bookdetail.pub_date}}</h3>
 			<p class="card-text">{{bookdetail.description}}</p>
 			<ul class="actions">
+				{% if user.is_authenticated %}
 				<li><a href onClick="openTab(this)" name="/media/{{bookdetail.book_file}}" class="button">Read</a></li>
-				<form method="POST" style="margin-top: 1.3em;">
-					{{ favourite_form.as_p }}
-					Favourite: 
-					{% csrf_token %}
-					<li><button type="submit" class="button">Add to Favourites</button></li>
-			    </form>
+				<li><a href="{% url 'text2audio' bookdetail.pk %}" class="button">Audio</a></li>
+				{% else %}
+				<li><a href="/accounts/register" class="button">Read</a></li>
+				<li><a href="/accounts/register" class="button">Audio</a></li>
+				{% endif %}
+				{% if user.is_authenticated %}
+				{% if fav %}
+				{% else %}
+				<li><a href="{% url 'favourite_add' bookdetail.pk %}" class="button">Add to Library</a></li>
+				{% endif %}
+				{% else %}
+				<li><a href="/accounts/register" class="button">Add to Library</a></li>
+				{% endif %}
 			</ul>
 		</article>
 	</div>
-
 	<!----review-->
-	<h3>Review</h3>
+	<h3>Reviews</h3>
 	<div class="posts">
 		<article>
 			{% for comment in comments %}
-			<div class="card-text" style="padding: 10px;">
-				<p class="font-weight-bold">
-					{{ comment.name }}
-					<span class=" text-muted font-weight-normal">
-						{{ comment.created_on }}
-					</span>
-					<strong>Rating: {{ comment.rating }}</strong> <span style="color:orange;">
-				</p>
-				{{ comment.body | linebreaks }}
-			</div>
+					<div class="comment_box">
+				          <b>{{ comment.name }}</b>
+						<div class="comment_date"><i> {{ comment.created_on }} </i></div>
+						<div class="comment-body">
+							<p> {{ comment.body }}</p>
+						</div>
+						<div class="reply"> <a>Rating: {{ comment.rating }}</a></div>
+					</div>
 			{% endfor %}
 		</article>
 		<article>
 			<div class="card">
 				{% if new_comment %}
 				<div class="alert alert-success" role="alert">
-					Your comment is awaiting approval
+					<b>Your comment is awaiting approval</b>
 				</div>
 				{% else %}
 				<h3>Leave a comment</h3>
 				<form method="POST" style="margin-top: 1.3em;">
 					{{ comment_form.as_p }}
 					{% csrf_token %}
+					{% if user.is_authenticated %}
 					<button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+					{% else %}
+					<a href="/accounts/register" class="button">Submit</a>
+					{% endif %}
 				</form>
 				{% endif %}
 			</div>
