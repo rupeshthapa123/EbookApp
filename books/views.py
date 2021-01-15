@@ -8,11 +8,11 @@ from django.conf import settings
 from .forms import CommentForm
 from django.contrib import auth
 from django.contrib.auth.models import User
-from gtts import gTTS
+# from gtts import gTTS
 from playsound import playsound
 import PyPDF4
 import pyttsx3
-import keyword
+import keyboard
 import multiprocessing
 # Create your views here.
 def book(request):
@@ -109,22 +109,14 @@ def text2audio(request,id):
     speak = pyttsx3.init()
     speak.say(pdf_File)
     speak.runAndWait()
-	
-    return render(request,'books.html',{'bookdetail':bookdetail,'speak':speak})
-    # pdfReader = PyPDF4.PdfFileReader(pdf_File)   
-    # print(" No. Of Pages :", pdfReader.numPages)
-    # count = pdfReader.numPages
-    # print(pageObject.extractText())
-    # pdfFileObject.close()
-    # textList = []
-    # for i in range(count):
-    #    try:
-    #        page = pdf_Reader.getPage(6)
-    #        textList.append(page.extractText())
-    #    except:
-    #        pass
-    # textString = " ".join(textList)
-    # print(textString)
-    # myobj = gTTS(text=textString, lang=language, slow=False )
-    # myobj.save("media/audio/speech.mp3")
-    # os.system("start speech.mp3")
+    speak.stop()
+    return render(request,'audio.html',{'bookdetail':bookdetail,'speak':speak})
+
+def audio(request,id):
+    bookdetail = get_object_or_404(Book, id=id)
+    param={'bookdetail':bookdetail}
+    return render(request, 'audio.html',param)
+    
+
+  
+   

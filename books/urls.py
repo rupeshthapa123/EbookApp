@@ -13,5 +13,6 @@ urlpatterns = [
     path('Classcategory',views.Classcategory, name='Classcategory'),
     path('Educategory',views.Educategory, name='Educategory'),
     path('Allcategory',views.Allcategory, name='Allcategory'),
-    path('text2audio/<int:id>/', text2audio, name='text2audio')
+    path('text2audio/<int:id>/', text2audio, name='text2audio'),
+    path('audio/<int:id>/',views.audio, name='audio')
 ]

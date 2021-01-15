@@ -17,7 +17,7 @@
 			<ul class="actions">
 				{% if user.is_authenticated %}
 				<li><a href onClick="openTab(this)" name="/media/{{bookdetail.book_file}}" class="button">Read</a></li>
-				<li><a href="{% url 'text2audio' bookdetail.pk %}" class="button">Audio</a></li>
+				<li><a href="{% url 'audio' bookdetail.pk %}" class="button">Audio</a></li>
 				{% else %}
 				<li><a href="/accounts/register" class="button">Read</a></li>
 				<li><a href="/accounts/register" class="button">Audio</a></li>
@@ -35,17 +35,26 @@
 	</div>
 	<!----review-->
 	<h3>Reviews</h3>
+ <!-- Add icon library -->
+ <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 	<div class="posts">
 		<article>
 			{% for comment in comments %}
-					<div class="comment_box">
-				          <b>{{ comment.name }}</b>
-						<div class="comment_date"><i> {{ comment.created_on }} </i></div>
-						<div class="comment-body">
-							<p> {{ comment.body }}</p>
-						</div>
-						<div class="reply"> <a>Rating: {{ comment.rating }}</a></div>
-					</div>
+			<div class="comment_box">
+				<b>{{ comment.name }}</b>
+				<div class="comment_date"><i> {{ comment.created_on }} </i></div>
+				<div class="comment-body">
+					<p> {{ comment.body }}</p>
+				</div>
+				<div>Rating:
+					<span class="fa fa-star"></span>
+					<span class="fa fa-star"></span>
+					<span class="fa fa-star"></span>
+					<span class="fa fa-star"></span>
+					<span class="fa fa-star"></span>
+					{{comment.rating}}
+				</div>
+			</div>
 			{% endfor %}
 		</article>
 		<article>
@@ -75,4 +84,5 @@
 		window.open(th.name, '_blank');
 	}
 </script>
+
 {% endblock %}
