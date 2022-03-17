@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect,get_object_or_404
-from django.contrib.auth.models import User,auth
+from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from accounts.forms import EditProfileForm, UserDeleteForm
 from django.urls import reverse, reverse_lazy
@@ -38,7 +38,6 @@ def register(request):
         else:
             messages.info(request, 'Password doesnot match')
             return redirect('/accounts/register')
-        return redirect('/')
     else:
         return render(request,'register.html')
 

@@ -1,0 +1,1 @@
+web: gunicorn EbookApp.wsgi --log-file -

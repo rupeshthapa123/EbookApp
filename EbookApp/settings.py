@@ -24,7 +24,7 @@ SECRET_KEY = 'b02_=#1t%u67%c#)k-*01okzs%4b$052r@p((@i7&4jz28p4o%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['projectebook.herokuapp.com']
 
 #STAR_RATING_RATING_MODEL = 'myapp.MyRating'
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -72,20 +73,40 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'EbookApp.wsgi.application'
 
-
+import dj_database_url 
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'rupesh',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
+        'NAME': 'd6p2s2hfrl86ht',
+        'USER': 'ahcfxlztjaahod',
+        'PORT': 5432,
+        'PASSWORD': '02204cdd08d9f83cd46f84618a416ff8c03bd8a26dc7b9a5fb8e67b6bce16a1d',
+        'HOST': 'ec2-52-44-209-165.compute-1.amazonaws.com',
     }
 }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'rupesh',
+#         'USER': 'postgres',
+#         'PASSWORD': '1234',
+#         'HOST': 'localhost',
+#     }
+# }
+# DATABASES = {
+#     'default': {
+#         'ENGINE'  : 'django.db.backends.mysql', # <-- UPDATED line 
+#         'NAME'    : 'ebookdb',                 # <-- UPDATED line 
+#         'USER'    : 'root',                     # <-- UPDATED line
+#         'PASSWORD': '123456',              # <-- UPDATED line
+#         'HOST'    : 'localhost',                # <-- UPDATED line
+#         'PORT'    : '3306',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -122,12 +143,27 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+# STATIC_URL = '/static/'
+# django_heroku.settings(locals())
 
+
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR,'static')
+# ] 
+# STATIC_ROOT=  os.path.join(BASE_DIR,'assets')
+PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
+STATIC_ROOT  =   os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static')
-] 
-STATIC_ROOT=  os.path.join(BASE_DIR,'assets')
+
+# Extra lookup directories for collectstatic to find static files
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+
+#  Add configuration for static files storage using whitenoise
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
