@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'b02_=#1t%u67%c#)k-*01okzs%4b$052r@p((@i7&4jz28p4o%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['projectebook.herokuapp.com']
 
