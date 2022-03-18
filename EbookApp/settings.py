@@ -31,7 +31,6 @@ ALLOWED_HOSTS = ['projectebook.herokuapp.com']
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 INSTALLED_APPS = [
-    'books.apps.BooksConfig',
     'django.contrib.postgres',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'books.apps.BooksConfig',
 ]
 
 MIDDLEWARE = [
@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'EbookApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd6p2s2hfrl86ht',
-        'USER': 'ahcfxlztjaahod',
+        'NAME': 'd6rndqso58ktjo',
+        'USER': 'ijgqkvcgquoopt',
         'PORT': 5432,
-        'PASSWORD': '02204cdd08d9f83cd46f84618a416ff8c03bd8a26dc7b9a5fb8e67b6bce16a1d',
-        'HOST': 'ec2-52-44-209-165.compute-1.amazonaws.com',
+        'PASSWORD': '4991d0cc9c26a45b476ac7bc670643ac287d05e60ff1452ca09d10163f966537',
+        'HOST': 'ec2-3-232-73-180.compute-1.amazonaws.com',
     }
 }
 # DATABASES = {
